@@ -48,6 +48,15 @@ def edit_animal(index):
     else:
         return jsonify({"error": "Animal not found"}), 404
 
+@app.route('/api/animals/<int:index>', methods=['DELETE'])
+def delete_animal(index):
+    # Delete the animal at the specified index
+    if 0 <= index < len(animals):
+        deleted_animal = animals.pop(index)
+        return jsonify(deleted_animal), 200
+    else:
+        return jsonify({"error": "Animal not found"}), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
