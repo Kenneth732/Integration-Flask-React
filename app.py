@@ -29,6 +29,13 @@ animals = [
 def get_animals():
     return jsonify(animals)
 
+@app.route('/api/animals', methods=['POST'])
+def add_animal():
+    # Handle the POST request here, and add the new animal to your data
+    new_animal = request.json  # Assuming the new animal data is sent in JSON format
+    animals.append(new_animal)  # Add the new animal to your data
+    return jsonify(new_animal), 201  # Return the newly added animal with a 201 status code
+
 if __name__ == '__main__':
     app.run(debug=True)
 
