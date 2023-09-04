@@ -36,6 +36,19 @@ def add_animal():
     animals.append(new_animal)  # Add the new animal to your data
     return jsonify(new_animal), 201  # Return the newly added animal with a 201 status code
 
+@app.route('/api/animals/<int:index>', methods=['PUT'])
+def edit_animal(index):
+    # Get the updated animal data from the request
+    updated_animal = request.json
+
+    # Update the animal data at the specified index
+    if 0 <= index < len(animals):
+        animals[index] = updated_animal
+        return jsonify(updated_animal), 200
+    else:
+        return jsonify({"error": "Animal not found"}), 404
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
